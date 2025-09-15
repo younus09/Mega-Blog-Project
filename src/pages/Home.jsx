@@ -1,19 +1,12 @@
 import React,{useEffect, useState} from 'react'
 import service from '../appwrite/config'
 import { Container, PostCard } from '../components/index'
+import { useSelector } from 'react-redux'
 
 
 function Home() {
-    const [posts, setPosts] = useState([])
+    const posts = useSelector((state) => state.post.posts)
 
-    useEffect(()=>{
-        service.listPost()
-            .then((posts) => {
-                if (posts) {
-                    setPosts(posts.documents)
-                }
-            })
-    },[])
   
     if (posts.length === 0){
         return (
@@ -36,7 +29,7 @@ function Home() {
                 <div className='flex flex-wrap'>
                     {posts.map((post) => (
                         <div key={post.$id} className='p-2 w-1/4'>
-                            <PostCard {...post} />
+                            <PostCard featuredImage={post.featuredImage} $id={post.$id} title={post.$id} />
                         </div>
                     ))}
                 </div>

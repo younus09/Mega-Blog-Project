@@ -1,14 +1,7 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 const initialState = {
     posts : [
-        {
-            id:"",
-            userId: "",
-            title : "",
-            content : "",
-            status : "",
-            featuredImage: ""
-        },
+        
     ]
 }
 

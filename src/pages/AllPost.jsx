@@ -2,20 +2,11 @@ import React,{useState, useEffect} from 'react'
 
 import { PostCard , Container} from '../components/index'
 import service from '../appwrite/config'
+import { useSelector } from 'react-redux'
 
 function AllPost() {
-    const [posts , setPosts] = useState([])
-    useEffect(()=>{
-        service.listPost([])
-            .then((Cposts) => {
-                if (Cposts){
-                    console.log(Cposts.documents[0])
-                    setPosts(Cposts.documents)
-                }
-            })
-             
-    },[])
-
+   const posts =  useSelector(state => state.post.posts)
+    
   return (
     <div className='w-full py-8'>
         <Container>
