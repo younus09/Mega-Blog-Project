@@ -18,7 +18,7 @@ export const  authSlice = createSlice({
             state.userData = null;
         }
     }
-})
+}) 
 
 
 export const {logIn, logOut} = authSlice.actions //this is action from reducer from authslice
