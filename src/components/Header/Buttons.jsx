@@ -10,7 +10,7 @@ function Button({
 }) {
   return (
     <button
-        className = {`px-4 py-2 rounder-lg ${bgColor} ${textColor}  ${className} `}
+        className = {`px-4 py-2 rounder-lg hover:brightness-110 active:brightness-90 ${bgColor} ${textColor}  ${className}`}
         {...props}
         onClick={()=> props.onClick}
     >

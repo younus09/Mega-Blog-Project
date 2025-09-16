@@ -4,7 +4,8 @@ import {RTE, Button, Input, Select} from '../index'
 import appwriteService from "../../appwrite/config"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-
+import { useDispatch } from 'react-redux'
+import {addNewPost, updatePost} from '../../store/postSlice'
 
 function PostForm({post}) {
     const {register, handleSubmit, watch , setValue, control, getValues} = useForm({
@@ -17,6 +18,7 @@ function PostForm({post}) {
     })
     const navigate = useNavigate()
     const userData = useSelector((state)=>state.auth.userData)
+    const dispatch = useDispatch()
 
     const submit = async (data) =>{
           if (post){
@@ -28,7 +30,8 @@ function PostForm({post}) {
                 featuredImage: file ? file.$id : undefined
             })
             if (dbPost){
-                 navigate(`/post/${dbPost.$id}`)
+                dispatch(updatePost(post = dbPost))
+                navigate(`/post/${dbPost.$id}`)
             }
           }
           else{
@@ -42,6 +45,8 @@ function PostForm({post}) {
                     userId : userData.userData.$id
                 })
                 if (dbPost){
+                    
+                    dispatch(addNewPost(dbPost))
                     navigate(`/post/${dbPost.$id}`)
                 }
             }
@@ -122,7 +127,7 @@ function PostForm({post}) {
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full ">
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>
